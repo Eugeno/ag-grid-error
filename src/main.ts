@@ -1,6 +1,19 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { AppGrid } from './app/grid';
+import { NbDialogModule, NbThemeModule } from '@nebular/theme';
 import { AppComponent } from './app/app.component';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter([
+      {
+        path: '',
+        component: AppGrid,
+      },
+    ]),
+    importProvidersFrom(NbDialogModule.forRoot()),
+    importProvidersFrom(NbThemeModule.forRoot()),
+  ],
+});
