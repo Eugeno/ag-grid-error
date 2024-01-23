@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { MatDialog } from '@angular/material/dialog';
 import { ICellRendererAngularComp } from "ag-grid-angular";
 import { ICellRendererParams } from "ag-grid-community";
-import { NbDialogService } from '@nebular/theme';
 import { ModalGrid } from './modal';
 
 @Component({
@@ -11,7 +11,7 @@ import { ModalGrid } from './modal';
   template: '<button (click)="open()">Open</button>',
 })
 export class TestComponent implements ICellRendererAngularComp {
-  private dialogService = inject(NbDialogService);
+  private dialog = inject(MatDialog);
 
   agInit(params: ICellRendererParams): void {
   }
@@ -21,6 +21,6 @@ export class TestComponent implements ICellRendererAngularComp {
   }
 
   open() {
-    this.dialogService.open(ModalGrid).onClose.subscribe();
+    this.dialog.open(ModalGrid);
   }
 }
